@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -6,7 +5,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import SignInScreen from './Screens/SignInScreen';
 import SignUpScreen from './Screens/SignUpScreen';
 import HomeTabContainer from './Screens/HomeTabContainer';
-
 
 const Stack = createStackNavigator();
 

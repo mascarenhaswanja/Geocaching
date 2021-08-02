@@ -43,6 +43,7 @@ function SignInScreen({navigation,route}) {
 
     const goToSignUp = () => {
         navigation.navigate('HomeTabContainer')
+        // navigation.navigate('SignUp')
     }
   
   return (

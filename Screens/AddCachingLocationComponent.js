@@ -48,9 +48,9 @@ const AddCachLoc = ({navigation,route}) => {
           }
         )
         .then( (location) => {
-          console.log(`location recieved : ${JSON.stringify(location)}`)
           setLocLat(location.coords.latitude)
           setLocLng(location.coords.longitude)
+
         })
         .catch((err)=>{
           console.log("Error when requesting permission")

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { Button, SafeAreaView, Text, View, TextInput} from "react-native";
-import { geostyles } from '../config/Styles';
-import { db } from "../config/FirebaseManager"
+import { geostyles } from '../utilities/Styles';
+import { db } from "../utilities/FirebaseManager"
 
 function SignInScreen({navigation,route}) {
   const [userEmail, setUserEmail] = useState('')
@@ -42,7 +42,7 @@ function SignInScreen({navigation,route}) {
     }
 
     const goToSignUp = () => {
-        navigation.navigate('SignUpScreen')
+        navigation.navigate('HomeTabContainer')
     }
   
   return (

@@ -3,7 +3,7 @@ import {View, Text} from "react-native";
 import AddCachLoc from "./AddCachingLocationComponent";
 
 //define the exponent
-function ProfileScreen(props) {
+function AddCache(props) {
     return (
         <View>
             <Text>Profile Screen</Text>
@@ -15,4 +15,4 @@ function ProfileScreen(props) {
 
 
 //export the component
-export default ProfileScreen;
+export default AddCache;

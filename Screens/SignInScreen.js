@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-import React, {useState} from "react";
-import { Button, SafeAreaView, Text, View, TextInput} from "react-native";
-import { geostyles } from '../utilities/Styles';
-import { db } from "../utilities/FirebaseManager"
-=======
 import React, {useState} from "react"
 import { Button, SafeAreaView, Text, View, TextInput} from "react-native"
 import { geostyles } from '../utilities/Styles'
 import { db } from '../utilities/FirebaseManager'
->>>>>>> 32d492e (SignIn style)
 
 function SignInScreen({navigation,route}) {
   const [userEmail, setUserEmail] = useState('')
@@ -16,19 +9,14 @@ function SignInScreen({navigation,route}) {
   const [errorMsg, setErrorMsg] = useState('')
 
   const signInPressed = () => {
-    setErrorMsg('')
+    let isValid = false
+
     if (!userEmail || !userPassword) {
       setErrorMsg('Please enter a Email/Password')
       alert(errorMsg)
       return;
     }
-
-    let isValid = false
-  
-      //db.collection('users').where('email', '==', userEmail).get()
-      //.where('password', '==', userSignIn.password).get()
-      //db.collection('users').doc(userEmail).get()
-      db.collection('users').get()
+    db.collection('users').get()
       .then((querySnapshot) => {
         querySnapshot.forEach((documentFromFirestore) => {
          //console.log(`${documentFromFirestore.id}, ${JSON.stringify(documentFromFirestore.data())}`)
@@ -41,12 +29,13 @@ function SignInScreen({navigation,route}) {
       })
       .then(() => {
         if (isValid) {
-          // go to Dashboard
-          console.log(`GO to Dashboard`)
-          //navigation.navigate('Dashboard')
+          console.log(`Go to Home`)
+          navigation.navigate('HomeTabContainer')
         } else {
           setErrorMsg(`User doesnt exist - Go to Signup`)
           alert(errorMsg)
+          setUserEmail('')
+          setUserPassword('')
         }
       })
       .catch((error) => {
@@ -54,25 +43,10 @@ function SignInScreen({navigation,route}) {
          setErrorMsg(`User doesnt exist - Go to Signup - ${error}`)
          alert(errorMsg)
      })
-
-     if (isValid === true) {
-       // go to Dashboard
-       console.log(`GO to Dashboard`)
-       //navigation.navigate('Dashboard')
-     } else {
-      setErrorMsg(`User doesnt exist - Go to Signup`)
-      alert(errorMsg)
-     }
- 
     }
 
     const goToSignUp = () => {
-<<<<<<< HEAD
         navigation.navigate('HomeTabContainer')
-=======
-      console.log(`GO to Dashboard`)
-      //  navigation.navigate('SignUpScreen')
->>>>>>> 32d492e (SignIn style)
     }
   
   return (
@@ -89,7 +63,6 @@ function SignInScreen({navigation,route}) {
                 onChangeText={(userEmail) =>
                   setUserEmail(userEmail)
                 }
-                value={userEmail}
             />
 
             <TextInput
@@ -102,11 +75,10 @@ function SignInScreen({navigation,route}) {
                 onChangeText={(userPassword) =>
                   setUserPassword(userPassword)
                 }
-                value={userPassword}
               />
  
             <Button title="SignIn" onPress={signInPressed}/>
-            <Button title="SignUp" onPress={goToSignUp}/>
+            <Button title="Don't have account? SignUp" onPress={goToSignUp}/>
         </View>
     </SafeAreaView>
   )

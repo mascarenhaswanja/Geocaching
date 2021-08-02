@@ -4,13 +4,13 @@ const geostyles = StyleSheet.create({
     container: {
         flex: 1,
         //backgroundColor: '#f3f3f3', 
-        backgroundColor: '#b0c9a1',
+        backgroundColor: '#bdd3de',
         alignItems: 'center',
         // justifyContent: 'center',
     },
     title: {
         fontSize: 25,
-        color: "#385427",
+        color: "#0691d6",
         fontWeight: "bold",
         textAlign: "center",
         marginBottom: 30,

@@ -93,7 +93,7 @@ const AddCachLoc = ({navigation,route}) => {
                 placeholderTextColor="#8b9cb5"
                 autoCapitalize="none"
                 returnKeyType="next"
-                value={locLat}
+                value={String(locLat)}
 
             />    
               <TextInput
@@ -104,7 +104,7 @@ const AddCachLoc = ({navigation,route}) => {
                 placeholderTextColor="#8b9cb5"
                 autoCapitalize="none"
                 returnKeyType="next"
-                value={locLng}
+                value={String(locLng)}
             />    
                   
             <Button title="Save Cach" onPress={saveCachLoc}/>

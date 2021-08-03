@@ -6,7 +6,6 @@ import AddCachLoc from "./AddCachingLocationComponent";
 function AddCache(props) {
     return (
         <View>
-            <Text>Profile Screen</Text>
             <AddCachLoc />
         </View>
     );

@@ -4,6 +4,8 @@ import { db } from "../utilities/FirebaseManager";
 import { useEffect } from "react";
 import MapComponent from "./CachingLocationMapComponent"
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { geostyles } from '../utilities/Styles'
+
 
 const GeoCachingList = ({navigation,route}) => {
     const [locPinData,setLocPinData] = useState([]);
@@ -15,7 +17,33 @@ const GeoCachingList = ({navigation,route}) => {
     const [email,setEmail] = useState('')
 
     let tempLocArray = [];
+    const fetchCurrentLocation = () => {
+      Location.requestForegroundPermissionsAsync()
+      .then(
+        (result) => {
+          if (result.status === "granted") {
+            console.log("User gave us permission to access their location")
+            return Location.getCurrentPositionAsync({})
+          }
+          else {
+            console.log("User denied permission")
+            throw new Error("User didn't grant the permission");
+          }
+        }
+      )
+      .then( (location) => {
+        console.log(`lat ${location.coords.latitude} lng ${location.coords.longitude} `)
+        setMapLat(location.coords.latitude)
+        setMapLng(location.coords.longitude)
 
+      })
+      .catch((err)=>{
+        console.log("Error when requesting permission")
+        console.log(err)
+        //update the UI to inform user of deny permission
+      })
+
+ }
     const getGeoCachingLocationFromFirebase = () => {
         db.collection("cachLocations").get().then((querySnapshot) => {
             querySnapshot.forEach((documentFromFirestore) => {
@@ -72,6 +100,13 @@ const GeoCachingList = ({navigation,route}) => {
           )
       }
 
+      useEffect(() => {
+        const interval = setInterval(() => {
+          setMsg('')
+        }, 3000);
+        return () => clearInterval(interval);
+      }, []);
+
     return (
     <View>
     {isLoading ? (<ActivityIndicator animating={true} size="large"/>) : (
@@ -87,11 +122,9 @@ const GeoCachingList = ({navigation,route}) => {
                 </Pressable>)}
                 /> 
     )}
-    <Text>{msg}</Text>
+    <Text style={geostyles.prompt}>{msg}</Text>
 
-
-    {/* <MapComponent lat={mapLat} lng={mapLng} desc={mapDesc}/> */}
-    <MapComponent markers={locPinData}/>
+    <MapComponent lat={mapLat} lng={mapLng} desc={mapDesc}/>
     </View>)
 }
 

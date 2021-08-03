@@ -25,17 +25,18 @@ const AddCachLoc = ({navigation,route}) => {
     .then((docRef) => {
         console.log("Document written with ID: ", docRef.id);
         setMsg(`Successfully added`)
+        setLocDesc('')
+    setLocHint('')
+    setLocLat('')
+    setLocLng('')
+    setMsg('')
     })
     .catch((error) => {
         console.error("Error adding document: ", error);
         setMsg("Error while saving Cach Location!");
     });
 
-    setLocDesc('')
-    setLocHint('')
-    setLocLat('')
-    setLocLng('')
-    setMsg('')
+    
    }   
 
    const fetchCurrentLocation = () => {
@@ -71,6 +72,7 @@ const AddCachLoc = ({navigation,route}) => {
       <SafeAreaView style={geostyles.container}>
         <Text style={geostyles.title}>Hide a Geocaching</Text>
         <View >
+
               <TextInput
                 style={geostyles.input}
                 onChangeText={(desc) =>
@@ -80,19 +82,21 @@ const AddCachLoc = ({navigation,route}) => {
                 placeholderTextColor="#8b9cb5"
                 autoCapitalize="none"
                 returnKeyType="next"
+                value={locDesc}
             />    
               <TextInput
                 style={geostyles.input}
                 onChangeText={(hint) =>
                     setLocHint(hint)
                 }
+                value={locHint}
                 placeholder="Enter hint"  
                 placeholderTextColor="#8b9cb5"
                 autoCapitalize="none"
                 returnKeyType="next"
             />    
 
-              <Button title="Fetch Location" onPress={fetchCurrentLocation}/>
+              <Button style={geostyles.button} title="Fetch Location" onPress={fetchCurrentLocation}/>
                 
               <TextInput
                 style={geostyles.input}
@@ -117,10 +121,11 @@ const AddCachLoc = ({navigation,route}) => {
                 returnKeyType="next"
                 value={String(locLng)}
             />    
-                  
-            <Button title="Save Geocache" onPress={saveCachLoc}/>
+             <Button title="Save Geocache Item" onPress={saveCachLoc}/>
+
           </View>
         <Text>{msg}</Text>
+
         </SafeAreaView>
     );
 }

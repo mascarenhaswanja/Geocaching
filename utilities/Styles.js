@@ -1,12 +1,17 @@
 import { StyleSheet } from "react-native";
+import { color } from "react-native-reanimated";
 
 const geostyles = StyleSheet.create({
     container: {
-        flex: 1,
         //backgroundColor: '#f3f3f3', 
         backgroundColor: '#bdd3de',
         alignItems: 'center',
         // justifyContent: 'center',
+        height: 750
+    },
+    prompt: {
+        fontSize: 30,
+        color : '#f3f3aa'
     },
     title: {
         fontSize: 25,

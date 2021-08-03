@@ -3,12 +3,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import MapGeoCachingScreen from './MapGeoCachingScreen';
+import SignInScreen from './SignInScreen';
 import AddCache from './AddCacheComponent';
 import FavouriteScreen from './FavouriteScreen';
 
 
 function HomeTabContainer(props) {
     const Tab = createBottomTabNavigator();
+
     return (
     <Tab.Navigator screenOptions={({route}) => ({tabBarIcon : (focused,color,size) => {
         let iconName;

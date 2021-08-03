@@ -1,9 +1,8 @@
 import React,{useState} from "react";
 import { Button, SafeAreaView,TextInput ,Text ,View} from "react-native";
+import { geostyles } from '../utilities/Styles'
 import { db } from "../utilities/FirebaseManager";
 import * as Location from "expo-location";
-
-
 
 const AddCachLoc = ({navigation,route}) => {
     const [locDesc, setLocDesc] = useState('')
@@ -31,6 +30,12 @@ const AddCachLoc = ({navigation,route}) => {
         console.error("Error adding document: ", error);
         setMsg("Error while saving Cach Location!");
     });
+
+    setLocDesc('')
+    setLocHint('')
+    setLocLat('')
+    setLocLng('')
+    setMsg('')
    }   
 
    const fetchCurrentLocation = () => {
@@ -48,9 +53,10 @@ const AddCachLoc = ({navigation,route}) => {
           }
         )
         .then( (location) => {
-          console.log(`location recieved : ${JSON.stringify(location)}`)
+          console.log(`lat ${location.coords.latitude} lng ${location.coords.longitude} `)
           setLocLat(location.coords.latitude)
           setLocLng(location.coords.longitude)
+
         })
         .catch((err)=>{
           console.log("Error when requesting permission")
@@ -61,10 +67,12 @@ const AddCachLoc = ({navigation,route}) => {
 
    }
 
-
     return (
-        <View>
+      <SafeAreaView style={geostyles.container}>
+        <Text style={geostyles.title}>Hide a Geocaching</Text>
+        <View >
               <TextInput
+                style={geostyles.input}
                 onChangeText={(desc) =>
                     setLocDesc(desc)
                 }
@@ -74,6 +82,7 @@ const AddCachLoc = ({navigation,route}) => {
                 returnKeyType="next"
             />    
               <TextInput
+                style={geostyles.input}
                 onChangeText={(hint) =>
                     setLocHint(hint)
                 }
@@ -84,8 +93,9 @@ const AddCachLoc = ({navigation,route}) => {
             />    
 
               <Button title="Fetch Location" onPress={fetchCurrentLocation}/>
-
+                
               <TextInput
+                style={geostyles.input}
                 onChangeText={(lat) =>
                   setLocLat(lat)
                 }
@@ -93,10 +103,11 @@ const AddCachLoc = ({navigation,route}) => {
                 placeholderTextColor="#8b9cb5"
                 autoCapitalize="none"
                 returnKeyType="next"
-                value={locLat}
+                value={String(locLat)}
 
             />    
               <TextInput
+                style={geostyles.input}
                 onChangeText={(lng) =>
                   setLocLng(lng)
                 }
@@ -104,13 +115,13 @@ const AddCachLoc = ({navigation,route}) => {
                 placeholderTextColor="#8b9cb5"
                 autoCapitalize="none"
                 returnKeyType="next"
-                value={locLng}
+                value={String(locLng)}
             />    
                   
-            <Button title="Save Cach" onPress={saveCachLoc}/>
-
-<Text>{msg}</Text>
-        </View>
+            <Button title="Save Geocache" onPress={saveCachLoc}/>
+          </View>
+        <Text>{msg}</Text>
+        </SafeAreaView>
     );
 }
 

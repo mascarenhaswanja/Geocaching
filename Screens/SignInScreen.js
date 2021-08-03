@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import { Button, SafeAreaView, Text, View, TextInput} from "react-native"
 import { geostyles } from '../utilities/Styles'
 import { db } from '../utilities/FirebaseManager'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 function SignInScreen({navigation,route}) {
   const [userEmail, setUserEmail] = useState('')
@@ -9,13 +10,16 @@ function SignInScreen({navigation,route}) {
   const [errorMsg, setErrorMsg] = useState('')
 
   const signInPressed = () => {
+    // setErrorMsg('')
     let isValid = false
+  
+    // INPUT VALIDATION
+    // if (!userEmail || !userPassword) {
+    //   setErrorMsg('Please enter a Email/Password')
+    //   alert(errorMsg)
+    //   return;
+    // }  
 
-    if (!userEmail || !userPassword) {
-      setErrorMsg('Please enter a Email/Password')
-      alert(errorMsg)
-      return;
-    }
     db.collection('users').get()
       .then((querySnapshot) => {
         querySnapshot.forEach((documentFromFirestore) => {
@@ -30,6 +34,7 @@ function SignInScreen({navigation,route}) {
       .then(() => {
         if (isValid) {
           console.log(`Go to Home`)
+          saveEmail()
           navigation.navigate('HomeTabContainer')
         } else {
           setErrorMsg(`User doesnt exist - Go to Signup`)
@@ -44,10 +49,24 @@ function SignInScreen({navigation,route}) {
          alert(errorMsg)
      })
     }
+  
+    const saveEmail = () => {
+      AsyncStorage.setItem("email", userEmail)
+        .then(
+          () => {
+            console.log(`SIGNIN: Save Email was successfully ${userEmail}`)
+          }
+        )
+        .catch(
+          (error) => {
+            console.log(`Error save Email ${error}`)
+          }
+        )
+    }
 
     const goToSignUp = () => {
-        navigation.navigate('HomeTabContainer')
-    }
+      navigation.navigate('SignUp')
+    } 
   
   return (
     <SafeAreaView style={geostyles.container}>
@@ -76,7 +95,6 @@ function SignInScreen({navigation,route}) {
                   setUserPassword(userPassword)
                 }
               />
- 
             <Button title="SignIn" onPress={signInPressed}/>
             <Button title="Don't have account? SignUp" onPress={goToSignUp}/>
         </View>

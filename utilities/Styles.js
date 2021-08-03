@@ -24,5 +24,12 @@ const geostyles = StyleSheet.create({
         borderRadius: 10,
         marginBottom: 30
     },
+    item_title: {
+        fontSize: 20,
+        margin: 5,
+    },
+    separator:{
+        padding: 10
+    },
 })
 export {geostyles}

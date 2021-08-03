@@ -1,13 +1,17 @@
 import React from "react"
-import {View, Text} from "react-native";
+import {View} from "react-native";
+import { geostyles } from '../utilities/Styles'
+import GeoCachingList from "./GeoCachingListComponent";
 
 //define the exponent
 function MapGeoCachingScreen(props) {
-    return (
-        <View>
-            <Text>Map Geo Caching Screen</Text>
+      return (
+        <View style={geostyles.container}>
+          <GeoCachingList />
+       
         </View>
-    );
+      );
+    
 }
 
 

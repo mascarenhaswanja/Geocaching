@@ -1,5 +1,6 @@
 import React,{useState} from "react";
-import { Button, SafeAreaView,TextInput ,Text ,View} from "react-native";
+import { Button, SafeAreaView,TextInput ,Text } from "react-native";
+import { geostyles } from '../utilities/Styles'
 import { db } from "../utilities/FirebaseManager"
 
 
@@ -14,13 +15,13 @@ function SignUpScreen({navigation,route}) {
         db.collection("users").add(user)
           .then((docRef) => {
               console.log("Document written with ID: ", docRef.id);
-              setResult(`Successfully added to Fav List`)
+              setResult(`Successfully added to Users!`)
               navigation.navigate("SignIn");
 
           })
           .catch((error) => {
               console.error("Error adding document: ", error);
-              setResult("Error while adding to Fav List!");
+              setResult("Error while adding to Users!");
           });
 
     }
@@ -35,43 +36,48 @@ function SignUpScreen({navigation,route}) {
     }
     return (
         <SafeAreaView>
+        <Text style={geostyles.title}>Welcome to Geocaching</Text>
              <TextInput
+                style={geostyles.input}
                 onChangeText={(userEmail) =>
                   setUserEmail(userEmail)
                 }
                 placeholder="Enter Email"  
-                placeholderTextColor="#8b9cb5"
+                placeholderTextColor="#243b16"
                 autoCapitalize="none"
                 keyboardType="email-address"
                 returnKeyType="next"
             />
 
             <TextInput
+                style={geostyles.input}
                 onChangeText={(userPassword) =>
                   setUserPassword(userPassword)
                 }
                 placeholder="Enter Password"  
-                placeholderTextColor="#8b9cb5"
+                placeholderTextColor="#243b16"
                 blurOnSubmit={false}
                 secureTextEntry={true}
                 returnKeyType="next"
               />      
 
             <TextInput
+                style={geostyles.input}
                 onChangeText={(phone) =>
                     setUserPhone(phone)
                 }
                 placeholder="Enter phone"  
-                placeholderTextColor="#8b9cb5"
+                placeholderTextColor="#243b16"
                 autoCapitalize="none"
                 returnKeyType="next"
             />  
             <TextInput
+                style={geostyles.input}
                 onChangeText={(userName) =>
                   setUserName(userName)
                 }
                 placeholder="Enter name"  
-                placeholderTextColor="#8b9cb5"
+                placeholderTextColor="#243b16"
                 autoCapitalize="none"
                 returnKeyType="next"
             />    

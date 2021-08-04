@@ -65,8 +65,11 @@ const geostyles = StyleSheet.create({
     },
   
     card : {
-        backgroundColor : 'white'
+        backgroundColor : 'white',
 
+    },
+    item_history : {
+        width : '100%',
     }
 
 })

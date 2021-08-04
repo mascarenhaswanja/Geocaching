@@ -33,7 +33,7 @@ function SignInScreen({navigation,route}) {
         if (isValid) {
           console.log(`Go to Home`)
           saveEmail()
-          navigation.navigate('HomeTabContainer')
+          navigation.replace('HomeTabContainer')
         } else {
           setErrorMsg(`User doesnt exist - Go to Signup`)
           alert(errorMsg)

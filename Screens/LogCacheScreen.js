@@ -13,14 +13,15 @@ function LogCacheScreen({navigation,route}) {
 
     const getGeocache  = () => {
         console.log("cachSelected:", cachSelected);
-        db.collection('cachLocations').get()
+        db.collection('cachLocations').doc(String(cachSelected)).get()
         .then((querySnapshot) => {
-            querySnapshot.forEach((documentFromFirestore) => {
-                console.log(`Firestore ${documentFromFirestore.id}  ${JSON.stringify(documentFromFirestore.data())}`)
-                if (cachSelected === documentFromFirestore.data().cahcLocId) {
-                  console.log(`Cach Detail: ${documentFromFirestore.data()}`)
-              }
-            })
+            console.log(querySnapshot.data());
+            // querySnapshot.forEach((documentFromFirestore) => {
+            //     console.log(`Firestore ${documentFromFirestore.id}  ${JSON.stringify(documentFromFirestore.data())}`)
+            //     if (cachSelected === documentFromFirestore.data().cahcLocId) {
+            //       console.log(`Cach Detail: ${documentFromFirestore.data()}`)
+            //   }
+            // })
             // setDescription('')
             // setDtCreated('')
         })

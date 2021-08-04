@@ -25,8 +25,9 @@ function FavouriteScreen({navigation,route}) {
             //console.log("User ",userEmail)
             querySnapshot.forEach((documentFromFirestore) => {
             const fav = {
-              cahcLocId:  documentFromFirestore.id,
-              email: documentFromFirestore.data().userEmail
+              cahcLocId:  documentFromFirestore.get("cahcLocId"),
+              email: documentFromFirestore.data().userEmail,
+              desc : documentFromFirestore.get("desc")
             }
             if (userEmail === fav.email) {
                 // console.log(`Cach: ${fav.cahcLocId}, ${fav.email}`)
@@ -58,12 +59,12 @@ function FavouriteScreen({navigation,route}) {
             data = {data}
             keyExtractor = { (item, index) => { return item.cahcLocId }} 
             renderItem = { ( {item} ) => (
-            <TouchableOpacity  onLongPress={ () => { 
-                console.log(` Selected: ${item.cahcLocId}`)
+            <TouchableOpacity  onPress={ () => { 
+                console.log(` Selected: ${JSON.stringify(item)}`)
                 navigation.navigate("LogCache", {cachSelected: item.cahcLocId})
                 }}>
-                <View>
-                  <Text style={geostyles.item_title} id={item.cahcLocId}  >{item.cahcLocId}</Text>
+                <View key={item.cahcLocId}>
+                  <Text style={geostyles.item_title} id={item.cahcLocId}  >{item.desc}</Text>
                 </View>
                 <View  style={geostyles.separator}/>
             </TouchableOpacity>)}

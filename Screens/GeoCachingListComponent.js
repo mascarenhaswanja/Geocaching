@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import MapComponent from "./CachingLocationMapComponent"
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { geostyles } from '../utilities/Styles'
+import * as Location from "expo-location";
 
 
 const GeoCachingList = ({navigation,route}) => {
@@ -63,12 +64,15 @@ const GeoCachingList = ({navigation,route}) => {
           setLoading(false)
     }
 
-    useEffect(()=>{getGeoCachingLocationFromFirebase()}, []);
+    useEffect(()=>{getGeoCachingLocationFromFirebase()},[]);
+    useEffect(()=>{fetchCurrentLocation()}, []);
 
-    const addCachingLocToFav = (id) => {    
+
+    const addCachingLocToFav = (id,desc) => {    
         db.collection("favourites").add({
             cahcLocId : id,
-            userEmail : email
+            userEmail : email,
+            desc : desc
         })
         .then((docRef) => {
             console.log(`Document written with ID: ${docRef.id}`);
@@ -117,14 +121,14 @@ const GeoCachingList = ({navigation,route}) => {
                     <View >
                         <Text  id={item.key} > {item.desc} </Text>
                         <Text>{item.hint}</Text>
-                        <Button title="Add To Fav" onPress={()=>{addCachingLocToFav(item.key)}}></Button>
+                        <Button title="Add To Fav" onPress={()=>{addCachingLocToFav(item.key,item.desc)}}></Button>
                     </View>
                 </Pressable>)}
                 /> 
     )}
     <Text style={geostyles.prompt}>{msg}</Text>
 
-    <MapComponent lat={mapLat} lng={mapLng} desc={mapDesc}/>
+    {/* <MapComponent lat={mapLat} lng={mapLng} desc={mapDesc}/> */}
     </View>)
 }
 

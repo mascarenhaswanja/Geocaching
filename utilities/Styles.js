@@ -63,14 +63,22 @@ const geostyles = StyleSheet.create({
         width: 300,
         textAlignVertical: 'top'
     },
-  
     card : {
         backgroundColor : 'white',
-
     },
     item_history : {
         width : '100%',
-    }
+    },
+    card_fav : {
+        backgroundColor : 'white',
+        width : 360,
+        height: 60,
+    },
+    task: {
+        marginTop: 18,
+        fontSize: 25,
+        color: "black",
+    },
 
 })
 export {geostyles}

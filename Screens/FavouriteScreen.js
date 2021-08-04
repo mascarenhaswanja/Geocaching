@@ -53,14 +53,12 @@ function FavouriteScreen({navigation,route}) {
     useEffect( () => {getAllFavorites()}, [refresh])
 
     return (
-        <SafeAreaView style={geostyles.container}>
+        <View style={geostyles.container}>
           <View style={geostyles.refresh}>
-          <Button title="Refresh Favorites" onPress={()=> { setRefresh(!refresh)}}></Button>      
-
+           <Button title="Refresh Favorites" onPress={()=> { setRefresh(!refresh)}}></Button>      
           </View>
 
         <Text style={geostyles.title}>My Favorites</Text>
-        <Text style={geostyles.title}>Choose Item to Log</Text>
         { isLoading ? (<ActivityIndicator animating={true} size="large"/>) : (
             <FlatList
             data = {data}
@@ -70,14 +68,14 @@ function FavouriteScreen({navigation,route}) {
                 console.log(` Selected: ${JSON.stringify(item)}`)
                 navigation.navigate("LogCache", {cachSelected: item.cahcLocId})
                 }}>
-                <View key={item.cahcLocId}>
+                <View style={geostyles.card_fav} key={item.cahcLocId}>
                   <Text style={geostyles.item_title} id={item.cahcLocId}  >{item.desc}</Text>
                 </View>
                 <View  style={geostyles.list_separator}/>
             </TouchableOpacity>)}
             />
         )} 
-        </SafeAreaView>
+        </View>
     );
 }
 

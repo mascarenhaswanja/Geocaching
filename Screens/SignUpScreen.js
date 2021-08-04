@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import { Button, SafeAreaView,TextInput ,Text } from "react-native";
+import { Button, View, SafeAreaView,TextInput ,Text } from "react-native";
 import { geostyles } from '../utilities/Styles'
 import { db } from "../utilities/FirebaseManager"
 
@@ -41,6 +41,7 @@ function SignUpScreen({navigation,route}) {
     return (
         <SafeAreaView style={geostyles.container}>
         <Text style={geostyles.title}>Welcome to Geocaching</Text>
+        <View >
              <TextInput
                 style={geostyles.input}
                 onChangeText={(userEmail) =>
@@ -85,10 +86,9 @@ function SignUpScreen({navigation,route}) {
                 autoCapitalize="none"
                 returnKeyType="next"
             />    
-
-
-                <Button title="SignUp" onPress={goToSignUp}/>
-                <Text>{result}</Text>
+            <Button title="SignUp" onPress={goToSignUp}/>
+            <Text>{result}</Text>
+          </View>
         </SafeAreaView>
     );
 }

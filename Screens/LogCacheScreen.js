@@ -121,7 +121,7 @@ function LogCacheScreen({navigation,route}) {
                 data = {historyData}
                 keyExtractor = { (item, index) => {return item["created_time"];}}
                 renderItem = { ({item}) => (      
-                     <View key={item.key} style={geostyles.card}>
+                     <View key={item.key} style={geostyles.item_history}>
                         <Text style={[geostyles.item_title, geostyles.item_history]}> {item.comments} </Text>
                     </View>
                 )}

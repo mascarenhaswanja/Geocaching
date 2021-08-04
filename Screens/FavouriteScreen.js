@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import {View, Text, SafeAreaView, FlatList, ActivityIndicator, TouchableOpacity} from "react-native";
+import {View, Text, SafeAreaView, FlatList, ActivityIndicator, TouchableOpacity, Button} from "react-native";
 import { geostyles } from '../utilities/Styles'
 import { db } from '../utilities/FirebaseManager'
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -8,6 +8,7 @@ function FavouriteScreen({navigation,route}) {
     const [data, setData] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [msg,setMsg] = useState('')
+    const [refresh,setRefresh] = useState(false);
     
     let caches = []
 
@@ -36,6 +37,7 @@ function FavouriteScreen({navigation,route}) {
             })
             if (caches.length === 0) {
               alert("No Caches found")
+              navigation.replace("HomeTabContainer")
             }
             setData(caches)
             setIsLoading(false)
@@ -48,12 +50,13 @@ function FavouriteScreen({navigation,route}) {
         }
       )
     }
-    useEffect( () => {getAllFavorites()}, [])
+    useEffect( () => {getAllFavorites()}, [refresh])
 
     return (
         <SafeAreaView style={geostyles.container}>
         <Text style={geostyles.title}>My Favorites</Text>
-  
+        <Text style={geostyles.title}>Choose Item to Log</Text>
+        <Button title="Refresh Favorites" onPress={()=> { setRefresh(!refresh)}}></Button>      
         { isLoading ? (<ActivityIndicator animating={true} size="large"/>) : (
             <FlatList
             data = {data}
@@ -66,10 +69,10 @@ function FavouriteScreen({navigation,route}) {
                 <View key={item.cahcLocId}>
                   <Text style={geostyles.item_title} id={item.cahcLocId}  >{item.desc}</Text>
                 </View>
-                <View  style={geostyles.separator}/>
+                <View  style={geostyles.list_separator}/>
             </TouchableOpacity>)}
             />
-        )}       
+        )} 
         </SafeAreaView>
     );
 }

@@ -7,12 +7,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 function SignInScreen({navigation,route}) {
   const [userEmail, setUserEmail] = useState('')
   const [userPassword, setUserPassword] = useState('')
-  const [errorMsg, setErrorMsg] = useState('')
 
   const signInPressed = () => {
     let isValid = false
-  
-    // INPUT VALIDATION
+ 
     if (!userEmail || !userPassword) {
       alert('Please enter a Email/Password')
       return;
@@ -21,7 +19,6 @@ function SignInScreen({navigation,route}) {
     db.collection('users').get()
       .then((querySnapshot) => {
         querySnapshot.forEach((documentFromFirestore) => {
-         //console.log(`${documentFromFirestore.id}, ${JSON.stringify(documentFromFirestore.data())}`)
           if (userEmail === documentFromFirestore.data().email &&
               userPassword === documentFromFirestore.data().password) {
                 console.log(`Exists ${JSON.stringify(documentFromFirestore.data())}`)
@@ -31,20 +28,16 @@ function SignInScreen({navigation,route}) {
       })
       .then(() => {
         if (isValid) {
-          console.log(`Go to Home`)
           saveEmail()
           navigation.replace('HomeTabContainer')
         } else {
-          setErrorMsg(`User doesnt exist - Go to Signup`)
-          alert(errorMsg)
+          alert(`User does not exist - Go to Signup`)
           setUserEmail('')
           setUserPassword('')
         }
       })
       .catch((error) => {
-         console.error('Error getting document - no user-email found', error)
-         setErrorMsg(`User doesnt exist - Go to Signup - ${error}`)
-         alert(errorMsg)
+         alert(`Error getting document ${error}`)
      })
     }
   
@@ -63,7 +56,7 @@ function SignInScreen({navigation,route}) {
     }
 
     const goToSignUp = () => {
-      navigation.navigate('SignUp')
+      navigation.navigate("SignUp");
     } 
   
   return (

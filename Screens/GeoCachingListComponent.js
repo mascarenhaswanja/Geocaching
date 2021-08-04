@@ -37,7 +37,6 @@ const GeoCachingList = ({navigation,route}) => {
         console.log(`lat ${location.coords.latitude} lng ${location.coords.longitude} `)
         setMapLat(location.coords.latitude)
         setMapLng(location.coords.longitude)
-
       })
       .catch((err)=>{
         console.log("Error when requesting permission")
@@ -121,10 +120,11 @@ const GeoCachingList = ({navigation,route}) => {
                 keyExtractor = { (item, index) => {return item.key;}}
                 renderItem = { ({item}) => (<Pressable onPress={ () => { setMapLat(item.lat); setMapLng(item.lng); setMapDesc(item.desc)}}>
                     <View >
-                        <Text  id={item.key} > {item.desc} </Text>
-                        <Text>{item.hint}</Text>
+                        <Text style={geostyles.item_title} id={item.key} > {item.desc} </Text>
+                        <Text style={geostyles.item_hint}> {item.hint}</Text>
                         <Button title="Add To Fav" onPress={()=>{addCachingLocToFav(item.key,item.desc)}}></Button>
                     </View>
+                    <View  style={geostyles.list_separator}/>
                 </Pressable>)}
                 /> 
     )}

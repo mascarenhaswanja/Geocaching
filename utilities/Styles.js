@@ -2,16 +2,14 @@ import { StyleSheet } from "react-native";
 import { color } from "react-native-reanimated";
 
 const geostyles = StyleSheet.create({
-    container: {
-        //backgroundColor: '#f3f3f3', 
+    container: { 
         backgroundColor: '#bdd3de',
         alignItems: 'center',
-        // justifyContent: 'center',
         height: 750
     },
     prompt: {
-        fontSize: 30,
-        color : '#f3f3aa'
+        fontSize: 25,
+        color : '#3371FF'
     },
     title: {
         fontSize: 25,
@@ -22,7 +20,7 @@ const geostyles = StyleSheet.create({
         marginTop: 20
     },
     input: {
-        fontSize: 20,
+        fontSize: 25,
         width: "auto",
         height: 40,
         borderColor: "#1e380d",
@@ -34,8 +32,17 @@ const geostyles = StyleSheet.create({
         fontSize: 20,
         margin: 5,
     },
+    item_hint: {
+        fontSize: 15,
+        margin: 5,
+    },
     separator:{
         padding: 10
+    },
+    list_separator:{
+        height: 1,
+        marginBottom: 10,
+        backgroundColor: "gray"
     },
     log_geocache: {
         color: "#0691d6",
@@ -49,8 +56,9 @@ const geostyles = StyleSheet.create({
         borderRadius: 10,
     },
     text_geocache: {
+        fontSize: 20,
         height: 150,
-        width: 250,
+        width: 300,
         textAlignVertical: 'top'
     }
 

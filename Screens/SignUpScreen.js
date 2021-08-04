@@ -26,6 +26,10 @@ function SignUpScreen({navigation,route}) {
 
     }
     const goToSignUp = () => {
+        if (!userEmail || !userPassword) {
+            alert('Please enter a Email/Password')
+            return;
+        }  
         const User = {
             email : userEmail,
             password : userPassword,
@@ -35,7 +39,7 @@ function SignUpScreen({navigation,route}) {
         addUserToFirebase(User);
     }
     return (
-        <SafeAreaView>
+        <SafeAreaView style={geostyles.container}>
         <Text style={geostyles.title}>Welcome to Geocaching</Text>
              <TextInput
                 style={geostyles.input}

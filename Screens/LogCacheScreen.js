@@ -1,13 +1,16 @@
 import React, {useState, useEffect} from "react"
-import { Button, SafeAreaView, Text, View, TextInput} from "react-native"
+import { Button, SafeAreaView, Text, View, TextInput, Switch} from "react-native"
 import { geostyles } from '../utilities/Styles'
 import { db } from '../utilities/FirebaseManager'
  
 function LogCacheScreen({navigation,route}) {
     const [userComments, setUserComments] = useState('')
     const [description, setDescription] = useState('')
+    const [hint, setHint] = useState('')
     const [dtCreated, setDtCreated] = useState('')
-    const [errorMsg, setErrorMsg] = useState('')
+    const [isSwitchOn, setIsSwitchOn] = useState(false)
+    const [msg,setMsg] = useState('')
+  
   
     const {cachSelected} = route.params
 
@@ -15,32 +18,15 @@ function LogCacheScreen({navigation,route}) {
         console.log("cachSelected:", cachSelected);
         db.collection('cachLocations').doc(String(cachSelected)).get()
         .then((querySnapshot) => {
-            console.log(querySnapshot.data());
-            // querySnapshot.forEach((documentFromFirestore) => {
-            //     console.log(`Firestore ${documentFromFirestore.id}  ${JSON.stringify(documentFromFirestore.data())}`)
-            //     if (cachSelected === documentFromFirestore.data().cahcLocId) {
-            //       console.log(`Cach Detail: ${documentFromFirestore.data()}`)
-            //   }
-            // })
-            // setDescription('')
-            // setDtCreated('')
+            console.log(querySnapshot.data())
+            const cache = querySnapshot.data()
+            setDescription(cache.desc)
+            setHint(cache.hint)
+            setDtCreated(cache.date)
         })
         .catch((error) => {
              console.log("Error getting document:", error);
         });
-
-        // db.collection('cachLocations').doc(cachSelected).get()
-        // .then((doc) => {      
-        //     if (doc.exists) {
-        //       console.log("Document data:", doc.data());
-        //     } else {
-        //     // doc.data() will be undefined in this case
-        //       console.log("Geocaching doesnt exist");
-        //     }
-        // })
-        // .catch((error) => {
-        //      console.log("Error getting document:", error);
-        // });
     }
 
     const saveGeoCache = () => {
@@ -48,8 +34,8 @@ function LogCacheScreen({navigation,route}) {
         db.collection("logCache").add({
                 cahcLocId : cachSelected,
                 comments : userComments,
-                // updated : currendate,
-                // status: userStatus
+                updated :  new Date().toLocaleDateString(),
+                status: isSwitchOn
             })
             .then((docRef) => {
                 console.log(`Document written with ID: ${docRef.id}`);
@@ -59,7 +45,11 @@ function LogCacheScreen({navigation,route}) {
                 console.error("Error adding document: ", error);
                 setMsg("Error while saving logCache!");
             })  
-            setMsg('')
+    }
+
+    const switchChanged = (dataFromSwitch) => {
+        console.log(dataFromSwitch)
+        setIsSwitchOn(dataFromSwitch)
     }
 
     useEffect( () => {getGeocache()}, [])
@@ -67,12 +57,18 @@ function LogCacheScreen({navigation,route}) {
     return (
       <SafeAreaView style={geostyles.container}>
           <Text style={geostyles.title}>Log Geocach</Text>
-          <Text style={geostyles.log_geocache}>{"Description"}</Text>
-          <Text style={geostyles.log_geocache}>{"Hidden by zzzz"}</Text>
-          <Text style={geostyles.log_geocache}>{"Created Date"}</Text>
-          <Text style={geostyles.log_geocache}>{"Dropdown: Found, Not Found, In Progress"}</Text>
-          <View style={geostyles.text_box} >
-              <TextInput
+          <Text style={geostyles.log_geocache}>{description}</Text>
+          <Text style={geostyles.log_geocache}>{hint}</Text>
+          <Text style={geostyles.log_geocache}>{dtCreated}</Text>
+          <Text style={geostyles.log_geocache}>Tasked Completed ? 
+            <Switch
+                onValueChange={switchChanged}
+                value={isSwitchOn}              
+            />
+        </Text>
+                
+          <View style={geostyles.text_box} > 
+                <TextInput
                   style={geostyles.text_geocache}
                   placeholder="Write Your Comment"  
                   placeholderTextColor="#243b16"
@@ -83,7 +79,7 @@ function LogCacheScreen({navigation,route}) {
                   onChangeText={(userComments) =>
                     setUserComments(userComments)
                   }
-              />    
+                />    
           </View>
           <Button title="Save" onPress={saveGeoCache}/>
       </SafeAreaView>

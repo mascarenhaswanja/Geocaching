@@ -16,6 +16,7 @@ const GeoCachingList = ({navigation,route}) => {
     const [mapDesc,setMapDesc] = useState('');
     const [msg,setMsg] = useState('')
     const [email,setEmail] = useState('')
+    const [refresh,setRefresh] = useState(false);
 
     let tempLocArray = [];
     const fetchCurrentLocation = () => {
@@ -64,7 +65,7 @@ const GeoCachingList = ({navigation,route}) => {
           setLoading(false)
     }
 
-    useEffect(()=>{getGeoCachingLocationFromFirebase()},[]);
+    useEffect(()=>{getGeoCachingLocationFromFirebase()},[refresh]);
     useEffect(()=>{fetchCurrentLocation()}, []);
 
 
@@ -113,6 +114,7 @@ const GeoCachingList = ({navigation,route}) => {
 
     return (
     <View>
+      <Button title="Refresh data" onPress={()=> { setRefresh(!refresh)}}></Button>
     {isLoading ? (<ActivityIndicator animating={true} size="large"/>) : (
        <FlatList
                 data = {locPinData}
@@ -128,7 +130,7 @@ const GeoCachingList = ({navigation,route}) => {
     )}
     <Text style={geostyles.prompt}>{msg}</Text>
 
-    {/* <MapComponent lat={mapLat} lng={mapLng} desc={mapDesc}/> */}
+    <MapComponent lat={mapLat} lng={mapLng} desc={mapDesc}/>
     </View>)
 }
 

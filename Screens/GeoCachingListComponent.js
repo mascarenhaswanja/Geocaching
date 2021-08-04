@@ -107,19 +107,21 @@ const GeoCachingList = ({navigation,route}) => {
       useEffect(() => {
         const interval = setInterval(() => {
           setMsg('')
-        }, 3000);
+        }, 5000);
         return () => clearInterval(interval);
       }, []);
 
     return (
     <View>
+      <View style={geostyles.refresh} >
       <Button title="Refresh data" onPress={()=> { setRefresh(!refresh)}}></Button>
+      </View>
     {isLoading ? (<ActivityIndicator animating={true} size="large"/>) : (
        <FlatList
                 data = {locPinData}
                 keyExtractor = { (item, index) => {return item.key;}}
                 renderItem = { ({item}) => (<Pressable onPress={ () => { setMapLat(item.lat); setMapLng(item.lng); setMapDesc(item.desc)}}>
-                    <View >
+                    <View style={geostyles.card}>
                         <Text style={geostyles.item_title} id={item.key} > {item.desc} </Text>
                         <Text style={geostyles.item_hint}> {item.hint}</Text>
                         <Button title="Add To Fav" onPress={()=>{addCachingLocToFav(item.key,item.desc)}}></Button>
@@ -129,8 +131,8 @@ const GeoCachingList = ({navigation,route}) => {
                 /> 
     )}
     <Text style={geostyles.prompt}>{msg}</Text>
-
     <MapComponent lat={mapLat} lng={mapLng} desc={mapDesc}/>
+
     </View>)
 }
 

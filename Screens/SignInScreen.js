@@ -29,7 +29,7 @@ function SignInScreen({navigation,route}) {
       .then(() => {
         if (isValid) {
           saveEmail()
-          navigation.replace('HomeTabContainer')
+          navigation.replace('GeoCaching')
         } else {
           alert(`User does not exist - Go to Signup`)
           setUserEmail('')

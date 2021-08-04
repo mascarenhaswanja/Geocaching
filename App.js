@@ -16,7 +16,7 @@ export default function App(props) {
        <Stack.Screen name="SignIn" component={SignInScreen}/>
        <Stack.Screen name="SignUp" component={SignUpScreen}/>
        <Stack.Screen name="Map" component={MapComponent} />
-       <Stack.Screen name="HomeTabContainer" component={HomeTabContainer}
+       <Stack.Screen name="GeoCaching" component={HomeTabContainer}
        options={ 
         ({navigation}) => ({ headerRight: () => (
           <Button title="SignOut" color="#000" onPress={() => navigation.replace('SignIn')}/>

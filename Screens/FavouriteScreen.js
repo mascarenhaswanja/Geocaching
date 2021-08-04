@@ -37,7 +37,7 @@ function FavouriteScreen({navigation,route}) {
             })
             if (caches.length === 0) {
               alert("No Caches found")
-              navigation.replace("HomeTabContainer")
+              navigation.replace("GeoCaching")
             }
             setData(caches)
             setIsLoading(false)
@@ -54,9 +54,13 @@ function FavouriteScreen({navigation,route}) {
 
     return (
         <SafeAreaView style={geostyles.container}>
+          <View style={geostyles.refresh}>
+          <Button title="Refresh Favorites" onPress={()=> { setRefresh(!refresh)}}></Button>      
+
+          </View>
+
         <Text style={geostyles.title}>My Favorites</Text>
         <Text style={geostyles.title}>Choose Item to Log</Text>
-        <Button title="Refresh Favorites" onPress={()=> { setRefresh(!refresh)}}></Button>      
         { isLoading ? (<ActivityIndicator animating={true} size="large"/>) : (
             <FlatList
             data = {data}

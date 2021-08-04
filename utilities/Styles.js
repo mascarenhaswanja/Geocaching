@@ -5,11 +5,13 @@ const geostyles = StyleSheet.create({
     container: { 
         backgroundColor: '#bdd3de',
         alignItems: 'center',
-        height: 750
+        height: 750,
     },
     prompt: {
         fontSize: 25,
-        color : '#3371FF'
+        color : '#3371FF',
+        backgroundColor : 'white',
+        textAlign : 'center'
     },
     title: {
         fontSize: 25,
@@ -37,10 +39,10 @@ const geostyles = StyleSheet.create({
         margin: 5,
     },
     separator:{
-        padding: 10
+        padding : 10 
     },
     list_separator:{
-        height: 1,
+        height: 3,
         marginBottom: 10,
         backgroundColor: "gray"
     },
@@ -60,6 +62,11 @@ const geostyles = StyleSheet.create({
         height: 150,
         width: 300,
         textAlignVertical: 'top'
+    },
+  
+    card : {
+        backgroundColor : 'white'
+
     }
 
 })

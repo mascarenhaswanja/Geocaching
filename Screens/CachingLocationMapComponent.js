@@ -15,8 +15,8 @@ const MapComponent = (props) => {
 
    
 
-     useEffect(()=> { setCurrentRegion({latitude: props.lat,
-      longitude:  props.lng,
+     useEffect(()=> { setCurrentRegion({latitude: Number(props.lat),
+      longitude:  Number(props.lng),
       latitudeDelta: 0.05,
       longitudeDelta: 0.05,  })},[props])
 
@@ -29,7 +29,7 @@ const MapComponent = (props) => {
            showCurrentLocation='true'
            region={currRegion}
           >
-           <Marker coordinate={{latitude: props.lat, longitude: props.lng}} title={props.desc} onPress={()=> {console.log("Marker clicked")}}/>
+           <Marker coordinate={{latitude: Number(props.lat), longitude: Number(props.lng)}} title={props.desc} onPress={()=> {console.log("Marker clicked")}}/>
            </MapView>
          
         </View>

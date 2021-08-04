@@ -22,6 +22,7 @@ const geostyles = StyleSheet.create({
         marginTop: 20
     },
     input: {
+        fontSize: 20,
         width: "auto",
         height: 40,
         borderColor: "#1e380d",
@@ -36,5 +37,22 @@ const geostyles = StyleSheet.create({
     separator:{
         padding: 10
     },
+    log_geocache: {
+        color: "#0691d6",
+        fontSize: 25,
+        borderColor: "#1e380d",
+        margin: 5,
+    },
+    text_box: {
+        borderWidth: 1,
+        padding: 5,
+        borderRadius: 10,
+    },
+    text_geocache: {
+        height: 150,
+        width: 250,
+        textAlignVertical: 'top'
+    }
+
 })
 export {geostyles}

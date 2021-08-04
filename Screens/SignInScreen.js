@@ -10,15 +10,13 @@ function SignInScreen({navigation,route}) {
   const [errorMsg, setErrorMsg] = useState('')
 
   const signInPressed = () => {
-    // setErrorMsg('')
     let isValid = false
   
     // INPUT VALIDATION
-    // if (!userEmail || !userPassword) {
-    //   setErrorMsg('Please enter a Email/Password')
-    //   alert(errorMsg)
-    //   return;
-    // }  
+    if (!userEmail || !userPassword) {
+      alert('Please enter a Email/Password')
+      return;
+    }  
 
     db.collection('users').get()
       .then((querySnapshot) => {

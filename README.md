@@ -1,6 +1,11 @@
 # Geocaching Application  
 A cross platform React Native that enables users to search for geocaching sites and keep a record of the items they find. 
 
+### 🖼️ Screenshots
+
+![](./screenshots/GeocachingScreen.png)
+
+
 ## :books: Project Description
  
 Geocaching is an outdoor activity where players hide random objects in random locations around a specific geographical area. The goal of the activity is to:
@@ -31,11 +36,7 @@ item the person is searching for, latitude and longitude)
   - User can track which geocache sites they have “in progress” or “completed”
   - User can keep notes about a specific geocache site  
   - User can take a photo of the geocache site  
-  
 
-### 🖼️ Screenshots
-
-![](./screenshots/GeocachingScreen.png)
 
 ## :white_check_mark: Attribution
  Intro to Geocaching: https://www.youtube.com/watch?v=xE-zMPhiAi0

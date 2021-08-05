@@ -35,7 +35,7 @@ item the person is searching for, latitude and longitude)
 
 ### 🖼️ Screenshots
 
-![](./screenshots/GeocacheScreen.png)
+![](./screenshots/GeocachingScreen.png)
 
 ## :white_check_mark: Attribution
  Intro to Geocaching: https://www.youtube.com/watch?v=xE-zMPhiAi0

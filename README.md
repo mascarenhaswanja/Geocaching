@@ -31,13 +31,11 @@ item the person is searching for, latitude and longitude)
   - User can track which geocache sites they have “in progress” or “completed”
   - User can keep notes about a specific geocache site  
   - User can take a photo of the geocache site  
-
-## :woman_student: :man_student: Students tasks
+  
 
 ### 🖼️ Screenshots
 
-## Welcome
-
+![](./screenshots/GeocacheScreen.png)
 
 ## :white_check_mark: Attribution
  Intro to Geocaching: https://www.youtube.com/watch?v=xE-zMPhiAi0
